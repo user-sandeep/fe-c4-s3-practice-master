@@ -1,0 +1,86 @@
+<p>
+  <mat-toolbar color="primary">
+    <h1>View Tube - Live Stream Event Form</h1>
+  </mat-toolbar>
+</p>
+<div class="form" >
+  <form (ngSubmit)="onSubmit()" [formGroup]="liveStream">
+    <mat-form-field appearance="fill" color="primary" class="titleform">
+      <input matInput placeholder="Add Title" type="text" id="title" formControlName="eventTitle" />
+      <mat-error *ngIf="eventTitle?.errors?.['required']">
+        <h4>Event title is required.</h4>
+      </mat-error>
+    </mat-form-field>
+    <div class="options">
+      <mat-form-field appearance="fill">
+        <input matInput [min]="maxDate" placeholder="From Date" [matDatepicker]="picker1" formControlName="FromDate">
+        <mat-error *ngIf="FromDate?.errors?.['required']">
+          <h4>Event scheduled From Date is required</h4>
+        </mat-error>
+
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <input type="text" placeholder="From Time" aria-label="Time" matInput [formControl]="myControl"
+          [matAutocomplete]="auto" />
+        <mat-error *ngIf="myControl?.errors?.['required']">
+          <h4>Event schedule From Time is required</h4>
+        </mat-error>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+
+        <input type="text" placeholder="To Time" aria-label="Time" matInput [formControl]="myControl2"
+          [matAutocomplete]="auto" />
+        <mat-error *ngIf="myControl2?.errors?.['required']">
+          <h4>Event schedule To Time is required</h4>
+        </mat-error>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+      <mat-form-field class="todate" appearance="fill">
+        <input matInput [min]="maxDate" placeholder="To Date" [matDatepicker]="picker2" formControlName="ToDate">
+        <mat-error *ngIf="ToDate?.invalid && (ToDate?.dirty || ToDate?.touched)">
+          <h4>Event scheduled To Date is required</h4>
+        </mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+
+    </div>
+    <mat-form-field class="maintext" appearance="fill">
+      <mat-label>Add Event Details</mat-label>
+      <textarea matInput rows="10" placeholder="Details"></textarea>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="emails">
+      <mat-label>Guests</mat-label>
+      <textarea matInput [(ngModel)]="guestEmails" formControlName="guests" class="form-control"></textarea>
+      <mat-error *ngIf="guests?.errors?.['required'] || guests?.errors?.['checkIfGuestEmailsAreValid'] ">
+        <h4>Email is required </h4>
+      </mat-error>
+
+    </mat-form-field>
+
+    <mat-chip-list class="example-chip" cdkDropList cdkDropListOrientation="horizontal">
+      <mat-chip class="example-box" *ngFor="let email of guestList">
+        {{email}}
+      </mat-chip>
+    </mat-chip-list>
+  </form>
+  <button mat-raised-button [disabled]="liveStream.invalid" (click)="onSubmit()">Save</button>
+</div>

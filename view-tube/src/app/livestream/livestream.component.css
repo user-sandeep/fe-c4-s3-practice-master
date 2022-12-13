@@ -1,0 +1,43 @@
+input{
+    color: rgb(80, 68, 184);
+}
+
+
+
+
+.form{
+    
+    margin-left: 20px;
+    margin-top: 50px;
+    color: rgb(126, 61, 74);
+}
+.titleform{
+    width:60%;
+   
+}
+.example-full-width{
+    margin-left: 40px;
+}
+.todate{
+    margin-left: 40px;
+}
+.maintext{
+    width: 37%;
+    margin-top: 40px;
+}
+  
+.options{
+    margin-top: 20px;
+}
+.emails{
+    width: 25%;
+    margin-left: 20px;
+    position: absolute;
+    margin-top: 40px;
+}
+.example-chip{
+  position: absolute;
+  margin-left: 2em;
+  margin-top: 10em;
+}
+
